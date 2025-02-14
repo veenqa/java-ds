@@ -90,3 +90,86 @@ public class Main {
         
     }
 }
+
+//[Find Common Elements Between Two Arrays
+
+class Solution {
+public int[] findIntersectionValues(int[] nums1, int[] nums2) {
+HashSet s1 = new HashSet<>();
+HashSet s2 = new HashSet<>();
+for (int n : nums1) {
+s1.add(n);
+}
+for (int n : nums2) {
+s2.add(n);
+}
+int c=0;
+int c1=0;
+for(int i:nums1){
+if(s2.contains(i)){
+c++;
+}
+}
+for(int i:nums2){
+if(s1.contains(i)){
+c1++;
+}
+}
+return new int[]{c, c1};
+}
+}
+
+//dupicate
+
+lass Solution {
+public boolean containsDuplicate(int[] nums) {
+HashSet s = new HashSet<>();
+for (int num : nums) {
+s.add(num);
+}
+if(s.size() == nums.length){
+return false;
+
+   }else{
+      return true;
+   } 
+}
+}
+
+
+//sum of unique
+class Solution {
+public int sumOfUnique(int[] nums) {
+HashSet s = new HashSet<>();
+for (int num : nums) {
+s.add(num);
+}
+int a=0;
+for(int i:s){
+if (map.get(i) == 1) {
+a+= i;
+}
+}
+return a;
+}
+}
+
+
+//Contains Duplicate
+
+class Solution {
+public boolean containsDuplicate(int[] nums) {
+HashSet s = new HashSet<>();
+for (int num : nums) {
+s.add(num);
+}
+if(s.size() == nums.length){
+return false;
+
+   }else{
+      return true;
+   } 
+}
+}
+
+
