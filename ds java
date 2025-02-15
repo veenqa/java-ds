@@ -183,3 +183,150 @@ class Solution {
     }
 }
 
+
+//inventry management system
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class inventorysystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<product> inventory = new ArrayList<>();
+        int choice;
+
+        do {
+            System.out.println("===== Inventory System Menu =====");
+            System.out.println("1. Add Product");
+            System.out.println("2. Display All Products");
+            System.out.println("3. Update Product Quantity");
+            System.out.println("4. Remove Product");
+            System.out.println("5. Search Product by ID");
+            System.out.println("6. Calculate Inventory Value");
+            System.out.println("7. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+
+            switch(choice) {
+                case 1:
+                    // Add Product
+                    product newProduct = new product();
+                    System.out.print("Enter product id: ");
+                    int id = scanner.nextInt();
+                    newProduct.setId(id);
+                    
+                    System.out.print("Enter product name: ");
+                    // Consume the newline left-over
+                    scanner.nextLine();
+                    String name = scanner.nextLine();
+                    newProduct.setName(name);
+                    
+                    System.out.print("Enter product quantity: ");
+                    int quantity = scanner.nextInt();
+                    newProduct.setQuantity(quantity);
+                    
+                    System.out.print("Enter product price: ");
+                    float price = scanner.nextFloat();
+                    newProduct.setPrice(price);
+                    
+                    inventory.add(newProduct);
+                    System.out.println("Product added successfully!");
+                    break;
+                    
+                case 2:
+                    // Display All Products
+                    if (inventory.isEmpty()) {
+                        System.out.println("No products available.");
+                    } else {
+                        System.out.println("List of Products:");
+                        for (product p : inventory) {
+                            System.out.println("ID: " + p.getId() + 
+                                               ", Name: " + p.getName() +
+                                               ", Quantity: " + p.getQuantity() +
+                                               ", Price: " + p.getPrice());
+                        }
+                    }
+                    break;
+                    
+                case 3:
+                    // Update Product Quantity
+                    System.out.print("Enter product id to update quantity: ");
+                    int updateId = scanner.nextInt();
+                    boolean foundUpdate = false;
+                    for (product p : inventory) {
+                        if (p.getId() == updateId) {
+                            System.out.print("Enter new quantity: ");
+                            int newQuantity = scanner.nextInt();
+                            p.setQuantity(newQuantity);
+                            System.out.println("Product quantity updated successfully!");
+                            foundUpdate = true;
+                            break;
+                        }
+                    }
+                    if (!foundUpdate) {
+                        System.out.println("Product not found.");
+                    }
+                    break;
+                    
+                case 4:
+                    // Remove Product
+                    System.out.print("Enter product id to remove: ");
+                    int removeId = scanner.nextInt();
+                    boolean foundRemove = false;
+                    for (int i = 0; i < inventory.size(); i++) {
+                        if (inventory.get(i).getId() == removeId) {
+                            inventory.remove(i);
+                            System.out.println("Product removed successfully!");
+                            foundRemove = true;
+                            break;
+                        }
+                    }
+                    if (!foundRemove) {
+                        System.out.println("Product not found.");
+                    }
+                    break;
+                    
+                case 5:
+                    // Search Product by ID
+                    System.out.print("Enter product id to search: ");
+                    int searchId = scanner.nextInt();
+                    boolean foundSearch = false;
+                    for (product p : inventory) {
+                        if (p.getId() == searchId) {
+                            System.out.println("Product Found:");
+                            System.out.println("ID: " + p.getId() +
+                                               ", Name: " + p.getName() +
+                                               ", Quantity: " + p.getQuantity() +
+                                               ", Price: " + p.getPrice());
+                            foundSearch = true;
+                            break;
+                        }
+                    }
+                    if (!foundSearch) {
+                        System.out.println("Product not found.");
+                    }
+                    break;
+                    
+                case 6:
+                    // Calculate Inventory Value
+                    float totalValue = 0;
+                    for (product p : inventory) {
+                        totalValue += p.getPrice() * p.getQuantity();
+                    }
+                    System.out.println("Total Inventory Value: " + totalValue);
+                    break;
+                    
+                case 7:
+                    System.out.println("Exiting Inventory System. Goodbye!");
+                    break;
+                    
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+            
+            System.out.println();
+        } while (choice != 7);
+        
+        scanner.close();
+    }
+}
+
